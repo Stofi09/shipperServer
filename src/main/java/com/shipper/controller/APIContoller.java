@@ -36,29 +36,30 @@ public class APIContoller {
 	public void setDeliveryService(DeliveryListService deliveryService) {
 		this.deliveryService=deliveryService;
 	}
-
-
+	
 	@GetMapping("/equipments/{id}")
 	public List<Equipment> retreiveEquipments(@PathVariable Long id) {
 		return equipmentService.getEquipments(id); 
 	}
+	
 	@RequestMapping("/all-list")
 	public List<DeliveryList> Alllist() {
 		return deliveryService.getDeliveries(); 
 	}
+	
 	@GetMapping("/list/{driver}")
 	public List<DeliveryList> list(@PathVariable String driver ) {
 		return deliveryService.getDeliveriesById(driver); 
 	}
 	
 	@PostMapping("/create")
-	public String createList(@RequestBody DeliveryList deliveryList){ 
-			deliveryService.createDeliveryList(deliveryList.getDriver(),deliveryList.getSupplier());
-		return "create";
+	public Long createList(@RequestBody DeliveryList deliveryList){ 
+		return deliveryService.createDeliveryList(deliveryList.getDriver(),deliveryList.getSupplier());
 	}
 	
 	@PostMapping("/createEquipment")
 	public Long createEquipment(@RequestBody Message message){
+		System.out.println(message);
 		return equipmentService.createEquipment(message.getName(),message.getQuantity(),message.getDeliveryListId());
 	}
 
@@ -70,7 +71,6 @@ public class APIContoller {
 	
 	@DeleteMapping("/deleteEquipment/{id}")
 	public String deleteEquipment(@PathVariable Long id){ 
-		System.out.println(id);
 		equipmentService.deleteEquipment(id);
 		return "deleteEquipment";
 	}
@@ -83,6 +83,7 @@ public class APIContoller {
 	
 	@PutMapping("/updateEquipment")
 	public String updateEquipment(@RequestBody Message message){ 
+		System.out.println(message);
 		equipmentService.updateList(message);
 		return "sik";
 	}

@@ -27,19 +27,38 @@ public class DeliveryListService {
 		return  deliveryRepository.findAll();
 	}
 	public List<DeliveryList> getDeliveriesById(String driver) {
-		return  deliveryRepository.findAllByDriver(driver);
+		if(MessageValidator.isNotEmpty(driver)) {
+			return  deliveryRepository.findAllByDriver(driver);
+		}else {
+			return getDeliveries();
+		}
 	}
 	public void deleteList(Long id) {
-		deliveryRepository.deleteById(id);
+		if (MessageValidator.isPositiveNumber(id)) {
+			deliveryRepository.deleteById(id);
+		} else {
+			System.err.print("It is not a valid number");
+		}
+		
 	}
-	public DeliveryList createDeliveryList(String driver, String supplier) {
-		DeliveryList delivery = new DeliveryList(driver,supplier);
+	public Long createDeliveryList(String driver, String supplier) {
+		if (MessageValidator.areStringsValid(driver, supplier)) {
+			DeliveryList delivery = new DeliveryList(driver,supplier);
 		deliveryRepository.save(delivery);
-		return delivery;
+		return delivery.getId();
+		} else {
+			return (long)0;
+		}
+		
 	}
 	public void updateList(DeliveryList newDelivery) {
-		deliveryList = deliveryRepository.findFirstById(newDelivery.getId());
+		if(MessageValidator.isValidList(newDelivery)) {
+			deliveryList = deliveryRepository.findFirstById(newDelivery.getId());
 		deliveryList = newDelivery;
 		deliveryRepository.save(deliveryList);
+		} else {
+			System.err.print("Not a valid list.");
+		}
+		
 	}
 }
