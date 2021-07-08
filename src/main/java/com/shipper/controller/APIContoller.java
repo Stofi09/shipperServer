@@ -27,6 +27,8 @@ public class APIContoller {
 	private EquipmentService equipmentService; 
 	private DeliveryListService deliveryService;
 	
+
+	
 	@Autowired
 	public void setEquipmentService(EquipmentService equipmentService) {
 		this.equipmentService = equipmentService;
@@ -37,24 +39,41 @@ public class APIContoller {
 		this.deliveryService=deliveryService;
 	}
 	
-	@GetMapping("/equipments/{id}")
-	public List<Equipment> retreiveEquipments(@PathVariable Long id) {
-		return equipmentService.getEquipments(id); 
-	}
 	
-	@RequestMapping("/all-list")
+	/*List*/
+	
+		@RequestMapping("/all-list")
 	public List<DeliveryList> Alllist() {
 		return deliveryService.getDeliveries(); 
 	}
-	
+		
 	@GetMapping("/list/{driver}")
 	public List<DeliveryList> list(@PathVariable String driver ) {
 		return deliveryService.getDeliveriesById(driver); 
 	}
 	
-	@PostMapping("/create")
+		@PostMapping("/create")
 	public Long createList(@RequestBody DeliveryList deliveryList){ 
 		return deliveryService.createDeliveryList(deliveryList.getDriver(),deliveryList.getSupplier());
+	}
+		
+	@DeleteMapping("/delete/{id}")
+	public String deleteList(@PathVariable Long id){ 	
+		deliveryService.deleteList(id);
+		return "delete";
+	}	
+	
+		@PutMapping("/update")
+	public String updateList(@RequestBody DeliveryList deliveryList){ 
+		deliveryService.updateList(deliveryList);
+		return "sik";
+	}	
+		
+		
+	/*Equipment*/
+	@GetMapping("/equipments/{id}")
+	public List<Equipment> retreiveEquipments(@PathVariable Long id) {
+		return equipmentService.getEquipments(id); 
 	}
 	
 	@PostMapping("/createEquipment")
@@ -62,23 +81,11 @@ public class APIContoller {
 		System.out.println(message);
 		return equipmentService.createEquipment(message.getName(),message.getQuantity(),message.getDeliveryListId());
 	}
-
-	@DeleteMapping("/delete/{id}")
-	public String deleteList(@PathVariable Long id){ 	
-		deliveryService.deleteList(id);
-		return "delete";
-	}
 	
-	@DeleteMapping("/deleteEquipment/{id}")
+		@DeleteMapping("/deleteEquipment/{id}")
 	public String deleteEquipment(@PathVariable Long id){ 
 		equipmentService.deleteEquipment(id);
 		return "deleteEquipment";
-	}
-	
-	@PutMapping("/update")
-	public String updateList(@RequestBody DeliveryList deliveryList){ 
-		deliveryService.updateList(deliveryList);
-		return "sik";
 	}
 	
 	@PutMapping("/updateEquipment")
@@ -87,5 +94,12 @@ public class APIContoller {
 		equipmentService.updateList(message);
 		return "sik";
 	}
+	
+	
+
+	
+
+	
+
 	
 }
