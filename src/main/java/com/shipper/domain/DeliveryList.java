@@ -28,6 +28,7 @@ public class DeliveryList {
 	@OneToMany(mappedBy = "deliveryList")
 	private List<Equipment> equipments;
 	
+	private int quantitySum;
 	
 	private DeliveryList() {}
 	
@@ -74,6 +75,15 @@ public class DeliveryList {
 
 	public void setEquipments(List<Equipment> equipments) {
 		this.equipments = equipments;
+	}
+
+	
+	public int getQuantitySum() {
+		return quantitySum;
+	}
+
+	public void setQuantitySum(int quantitySum) {
+		this.quantitySum = quantitySum;
 	}
 
 	@Override
