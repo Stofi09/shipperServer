@@ -23,18 +23,20 @@ public class DeliveryList {
 	
 	private String driver;
 	private String supplier;
-	
+	/*If the Integer's name is quantitySum I got a syntax error exception.*/
+	private Integer quantitysum;
 	@JsonBackReference
 	@OneToMany(mappedBy = "deliveryList")
 	private List<Equipment> equipments;
 	
-	private int quantitySum;
+
 	
 	private DeliveryList() {}
 	
-	public DeliveryList(String driver, String supplier) {
+	public DeliveryList(String driver, String supplier, Integer sum) {
 		this.driver = driver;
 		this.supplier = supplier;
+		this.quantitysum = sum;
 	}
 
 
@@ -78,18 +80,22 @@ public class DeliveryList {
 	}
 
 	
-	public int getQuantitySum() {
-		return quantitySum;
+	
+
+	public Integer getQuantitySum() {
+		return quantitysum;
 	}
 
-	public void setQuantitySum(int quantitySum) {
-		this.quantitySum = quantitySum;
+	public void setQuantitySum(Integer quantitySum) {
+		this.quantitysum = quantitySum;
 	}
 
 	@Override
 	public String toString() {
-		return "DeliveryList [id=" + id + ", driver=" + driver + ", supplier=" + supplier + "]";
+		return "DeliveryList [id=" + id + ", driver=" + driver + ", supplier=" + supplier + ", equipments=" + equipments
+				+ ", quantitySum=" + quantitysum + "]";
 	}
+
 
 
 
