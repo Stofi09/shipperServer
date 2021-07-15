@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shipper.domain.DeliveryList;
 import com.shipper.domain.Equipment;
-import com.shipper.domain.Message;
+import com.shipper.responses.Message;
 import com.shipper.service.DeliveryListService;
 import com.shipper.service.EquipmentService;
 

@@ -1,7 +1,7 @@
 package com.shipper.service;
 
 import com.shipper.domain.DeliveryList;
-import com.shipper.domain.Message;
+import com.shipper.responses.Message;
 
 public class MessageValidator {
 

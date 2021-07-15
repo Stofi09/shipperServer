@@ -1,4 +1,4 @@
-package com.shipper.domain;
+package com.shipper.responses;
 
 
 public class Message {

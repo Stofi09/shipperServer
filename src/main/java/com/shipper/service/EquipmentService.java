@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.shipper.domain.DeliveryList;
 import com.shipper.domain.Equipment;
-import com.shipper.domain.Message;
 import com.shipper.repository.DeliveryListRepository;
 import com.shipper.repository.EquipmentRepository;
+import com.shipper.responses.Message;
 
 @Service
 public class EquipmentService {
